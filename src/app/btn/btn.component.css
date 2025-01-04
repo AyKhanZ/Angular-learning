@@ -1,0 +1,9 @@
+mat-icon {
+  vertical-align: middle;
+}
+
+button {
+  display: flex;
+  align-items: center;  /* Центрирует содержимое по вертикали */
+  justify-content: center; /* Центрирует содержимое по горизонтали */
+}

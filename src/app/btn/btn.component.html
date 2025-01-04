@@ -1,0 +1,30 @@
+<button mat-flat-button [ngClass]="btnType" (click)="handleClick()" fxLayoutAlign="center center">
+  <ng-container *ngIf="btnType === 'Create task'; else other">
+    <mat-icon>add</mat-icon> Create task
+  </ng-container>
+  
+  <ng-template #other>
+    <ng-container *ngIf="btnType === 'Edit'; else createBtn">
+      <mat-icon>edit</mat-icon> 
+      Edit
+    </ng-container>
+
+    <ng-template #createBtn>
+      <ng-container *ngIf="btnType === 'Create'; else backBtn">
+        <mat-icon>add</mat-icon> 
+        Create
+      </ng-container>
+      
+      <ng-template #backBtn>
+        <ng-container *ngIf="btnType === 'Back'; else defaultBtn">
+          <mat-icon>arrow_back</mat-icon> 
+          Back
+        </ng-container>
+        
+        <ng-template #defaultBtn>
+          <mat-icon>delete</mat-icon> Delete
+        </ng-template>
+      </ng-template>
+    </ng-template>    
+  </ng-template> 
+</button>

@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="height: 100vh;">
+    <div  class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Title</mat-label>
+            <input [(ngModel)]="taskTitle" name="taskTitle" matInput placeholder="Ex. Project" />
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <mat-label>Comment</mat-label>
+            <textarea [(ngModel)]="taskDescription" name="taskDescription" matInput placeholder="Ex. Make an angular project..."></textarea>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <app-btn btnType = 'Back' 
+            [onClick]="backHandler"/>
+            <app-btn btnType = 'Create' 
+            [onClick]="createTaskHandler"/>
+        </div>
+    </div>
+</div>
+    

@@ -1,0 +1,21 @@
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        {{ task.title }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Status: {{ task.completed ? "Completed" : "Not Completed" }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="task.image" alt="{{ task.title }}" />
+
+    <mat-card-content>
+      <p>
+        {{ task.description }}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <app-btn [btnType]="'Delete'" [onClick]="deleteTaskHandler"/>
+    </mat-card-actions>
+  </mat-card>
