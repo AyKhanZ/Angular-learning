@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component , Input} from '@angular/core';
+import { ChangeDetectionStrategy, Component , EventEmitter, Input, Output} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { BtnComponent } from '../btn/btn.component';
-import { tasks } from '../../tasks'
 
 @Component({
   selector: 'app-card',
@@ -12,16 +11,11 @@ import { tasks } from '../../tasks'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  @Input() task: any;
-  tasks = tasks;
+  @Input() task: any; // Задача, переданная из родителя
+  @Output() deleteTask = new EventEmitter<any>(); // Создаём событие для удаления
 
   
-  deleteTaskHandler = () : void => {
-    this.tasks = this.tasks.filter(t => t.title !== this.task.title);
-    if(this.task && this.task.title){
-      console.log(this.task)
-      console.log(tasks)
-    }
-    else console.log("task is null")
+  deleteTaskHandler(): void {
+    this.deleteTask.emit(this.task); // Уведомляем родительский компонент об удалении
   }
 }

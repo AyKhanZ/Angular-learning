@@ -1,4 +1,4 @@
-<div *ngIf="tasks && tasks.length > 0">
+<div *ngIf="tasks$ | async as tasks; else noTasks">
   <div
     fxLayout="row wrap"
     fxLayoutAlign="space-evenly center"
@@ -10,7 +10,11 @@
       fxFlex.gt-sm="23%"
       fxFlex.md="23%"
     >
-      <app-card [task]="task"/>
+      <app-card [task]="task" (deleteTask)="handleDeleteTask($event)"></app-card>
     </div>
   </div>
 </div>
+
+<ng-template #noTasks>
+  <p>No tasks available!</p>
+</ng-template>

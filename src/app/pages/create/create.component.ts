@@ -5,7 +5,9 @@ import {FormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BtnComponent } from '../../btn/btn.component';
 import { Router } from '@angular/router';
-import { tasks } from '../../../tasks';
+import { initialState } from '../../store/tasks.reducer'
+import { addTask } from '../../store/tasks.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +16,7 @@ import { tasks } from '../../../tasks';
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store) {}
   taskTitle: string = '';
   taskDescription: string = '';
   
@@ -24,15 +26,19 @@ export class CreateComponent {
 
   createTaskHandler = (): void => {
     if (this.taskTitle && this.taskDescription) {
-      tasks.push({
-        title: this.taskTitle,
-        description: this.taskDescription,
-        image: "https://via.placeholder.com/150",
-        completed: false,
-        uncompleted: true,
-      });
+      this.store.dispatch(
+        addTask({
+          task: {
+            title: this.taskTitle,
+            description: this.taskDescription,
+            image: 'https://via.placeholder.com/150',
+            completed: false,
+            uncompleted: true,
+          },
+        })
+      );
 
-      console.log('Task added:', tasks[tasks.length - 1]);
+      console.log('Task dispatched');
       this.router.navigate(['/home']);
     } else {
       console.error('Title and description are required!');
