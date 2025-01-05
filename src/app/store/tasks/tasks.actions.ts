@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Task } from './tasks.reducer';
+import { Task } from './tasks.types';
 
-export const loadTasks = createAction('[Tasks] Load Tasks');
 export const addTask = createAction(
   '[Tasks] Add Task',
   props<{ task: { title: string; description: string; image: string; completed: boolean; uncompleted: boolean } }>()

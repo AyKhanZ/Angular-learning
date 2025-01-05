@@ -1,19 +1,26 @@
 import { Component } from "@angular/core";
-import {MatTabsModule} from '@angular/material/tabs';
+import {MatTabChangeEvent, MatTabsModule} from '@angular/material/tabs';
 import { BtnComponent } from "../btn/btn.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Router } from "@angular/router";
+import { ContentComponent } from "../content/content.component";
 @Component({
     selector: "app-header",
     standalone: true,
-    imports: [MatTabsModule,BtnComponent,FlexLayoutModule],
+    imports: [MatTabsModule,BtnComponent,FlexLayoutModule,ContentComponent],
     templateUrl: "./header.component.html",
     styleUrl: "./header.component.css",
 })
 export class HeaderComponent {
-    constructor(private router: Router) {}
+  selectedTab: string = "All";
+  constructor(private router: Router) {}
   
-    createTaskHandler = (): void => {
-      this.router.navigate(['/create']);
+  createTaskHandler = (): void => {
+    this.router.navigate(['/create']);
   };
+
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    console.log('tabChangeEvent => ', tabChangeEvent); 
+    console.log('index => ', tabChangeEvent.index); 
+}
 }

@@ -5,8 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BtnComponent } from '../../btn/btn.component';
 import { Router } from '@angular/router';
-import { initialState } from '../../store/tasks.reducer'
-import { addTask } from '../../store/tasks.actions';
+import { addTask } from '../../store/tasks/index';
 import { Store } from '@ngrx/store';
 
 @Component({

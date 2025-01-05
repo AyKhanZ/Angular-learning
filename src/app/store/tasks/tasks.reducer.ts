@@ -1,13 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadTasks, addTask, toggleTaskCompletion, deleteTask } from './tasks.actions';
+import { addTask, toggleTaskCompletion, deleteTask } from './tasks.actions';
+import { Task } from './tasks.types';
 
-export interface Task {
-  title: string;
-  description: string;
-  image: string;
-  completed: boolean;
-  uncompleted: boolean;
-}
+
 
 export const initialState: Task[] = [
   {
@@ -42,7 +37,6 @@ export const initialState: Task[] = [
 
 const _tasksReducer = createReducer(
   initialState,
-  on(loadTasks, (state) => [...state]),
   on(addTask, (state, { task }) => [...state, task]),
   on(toggleTaskCompletion, (state, { title }) => {
     return state.map(task =>

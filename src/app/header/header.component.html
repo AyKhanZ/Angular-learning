@@ -1,9 +1,8 @@
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
   <mat-tab label="All"> 
     <div fxLayout="row" fxLayoutAlign="center center">
       <h4 fxFlex="67">All tasks</h4> 
-      <app-btn [btnType] = "'Create task'"  
-      [onClick]="createTaskHandler"/>
+      <app-btn [btnType]="'Create task'" [onClick]="createTaskHandler"/>
     </div>
   </mat-tab>
   <mat-tab label="Completed">Completed</mat-tab>
