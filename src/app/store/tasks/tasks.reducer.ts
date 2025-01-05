@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { addTask, toggleTaskCompletion, deleteTask } from './tasks.actions';
+import { addTask, toggleTaskCompletion, deleteTask, completeTask } from './tasks.actions';
 import { Task } from './tasks.types';
 
 
@@ -46,7 +46,12 @@ const _tasksReducer = createReducer(
     );
   }),
   on(deleteTask, (state, { task }) =>
-    state.filter(t => t.title !== task.title) // Удаляем задачу по её названию
+    state.filter(t => t.title !== task.title)
+  ),
+  on(completeTask, (state, { task }) => 
+    state.map(t => 
+      t.title === task.title ? { ...t, completed: true, uncompleted: false } : t
+    )
   )
 );
 

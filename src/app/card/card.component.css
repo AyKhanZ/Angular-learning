@@ -1,0 +1,7 @@
+.completed-status {
+    color: green;
+  }
+  
+  .not-completed-status {
+    color: red;
+  }

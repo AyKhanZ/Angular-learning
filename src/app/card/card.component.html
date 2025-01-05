@@ -1,21 +1,38 @@
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>
-        {{ task.title }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        Status: {{ task.completed ? "Completed" : "Not Completed" }}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="task.image" alt="{{ task.title }}" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      {{ task.title }}
+    </mat-card-title>
+    <mat-card-subtitle
+      [ngClass]="{
+        'completed-status': task.completed,
+        'not-completed-status': !task.completed
+      }">
+      Status: {{ task.completed ? "Completed" : "Not Completed" }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="task.image" alt="{{ task.title }}" />
 
-    <mat-card-content>
-      <p>
-        {{ task.description }}
-      </p>
-    </mat-card-content>
+  <mat-card-content>
+    <p>
+      {{ task.description }}
+    </p>
+  </mat-card-content>
 
-    <mat-card-actions>
-      <app-btn [btnType]="'Delete'" [onClick]="deleteTaskHandler"/>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-actions>
+    <button
+      mat-flat-button
+      (click)="handleDeleteTask()"
+      fxLayoutAlign="center center"
+    >
+      <mat-icon>delete</mat-icon> Delete
+    </button>
+    <button
+      mat-flat-button
+      (click)="handleCompleteTask()"
+      fxLayoutAlign="center center"
+    >
+      <mat-icon>done</mat-icon> Complete
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -2,15 +2,19 @@
   <div
     fxLayout="row wrap"
     fxLayoutAlign="space-evenly center"
-    [fxLayoutGap]="20"
+    fxLayoutGap="10px" fxLayoutGap.gt-xs="20px"
   >
     <div
-      *ngFor="let task of tasks$"
+      *ngFor="let task of tasks"
       fxFlex="23%"
       fxFlex.gt-sm="23%"
       fxFlex.md="23%"
     >
-      <app-card [task]="task" (deleteTask)="handleDeleteTask($event)"></app-card>
+      <app-card
+      [task]="task"
+      (deleteTask)="handleDeleteTask(task)"    
+      (completeTask)="handleCompleteTask(task)"    
+      ></app-card>
     </div>
   </div>
 </div>
