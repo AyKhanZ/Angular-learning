@@ -1,0 +1,26 @@
+<div>
+  <ul style="list-style-type: none">
+    @for (item of allElements; track $index) {
+    <li>
+      <div class="container">
+        <div>
+          <h4>{{ item.title }}</h4>
+          <img
+            [src]="item.avatar"
+            [alt]="item.title"
+            width="60px"
+            height="50px"
+          />
+          <p>{{ item.description }}</p>
+        </div>
+        <div style="width: auto">
+          <p>
+            <b>Price: {{ item.price }} $</b>
+          </p>
+          <button (click)="onClick(item.id)" class="btn">Buy now!</button>
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+</div>
