@@ -1,1 +1,21 @@
-<h1>hello</h1>
+<form>
+  <p>
+    <label for="name">Name:</label>
+    <input name="name" id="name" type="text" [(ngModel)]="enteredName" />
+  </p>
+  <p>
+    <label for="name2">Name:</label>
+    <input name="name2" id="name2" type="text" [(ngModel)]="enteredName" />
+  </p>
+  <p>
+    <label for="email">Email:</label>
+    <input name="email" id="email" type="email" [(ngModel)]="enteredEmail"/>
+  </p>
+  <p>
+    <label for="email2">Email2:</label>
+    <input name="email2" id="email2" type="email" [(ngModel)]="enteredEmail"/>
+  </p>
+  {{enteredName}}
+  {{enteredEmail()}}
+  <button type="submit">Submit</button>
+</form>
