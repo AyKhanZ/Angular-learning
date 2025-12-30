@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <span>NASSA</span>
+        <img src="avatars-JUvAAPvAA86fmbVE-SH0i6g-t1080x1080.jpg" alt="nassa" width="40" height="35">
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        @for (item of navItems; track item.label) {
+            <li class="nav-item">
+              <a class="nav-link active" [href]="item.route">{{ item.label }}</a>
+            </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
