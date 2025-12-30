@@ -1,0 +1,11 @@
+<div class="sidebar">
+  <app-users (selectedUserId)="onSelectUser($event)" />
+</div>
+<div class="main-content">
+  <h1>To do list</h1>
+  <app-user [userId]="userId" />
+  <app-tasks [userId]="userId" />
+</div>
+<div class="add-container">
+  <app-new-user />
+</div>

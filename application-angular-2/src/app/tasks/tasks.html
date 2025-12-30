@@ -1,0 +1,5 @@
+@if(userId()) {
+  <p>Showing tasks for user with ID: {{ userId() }}</p>
+} @else {
+  <p>No user selected. Please select a user to see their tasks.</p>
+}

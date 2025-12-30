@@ -1,0 +1,16 @@
+@if(userId()) {
+  <small>{{user()?.name}} - {{user()?.email}}</small>
+  @for (task of user()?.tasks; track task.id) {
+    <p>
+      <b>{{task.title}}</b>
+      <span>{{task.description}}</span>
+      <i>{{task.status}}</i>
+    </p>
+  }
+  @if(user()?.tasks?.length === 0) {
+    <p><b>No tasks found for this user.</b></p>
+  }
+  <app-new-task [userId]="userId()"></app-new-task>
+} @else {
+  <p>No user selected. Please select a user to see details.</p>
+}

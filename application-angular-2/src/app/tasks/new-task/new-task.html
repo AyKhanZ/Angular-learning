@@ -1,0 +1,15 @@
+<button (click)="openAddUserForm()">Add new task</button>
+@if(isOpened) {
+    <form (ngSubmit)="onSubmit()">
+        <label for="title">
+            Title:
+            <input type="text" id="title" [(ngModel)]="enteredTitle" name="title" required />
+        </label>
+        <label for="description">
+            Description:
+            <input type="text" id="description" [(ngModel)]="enteredDescription" name="description" />
+        </label>
+        <input type="submit" id="submit" value="Add" />
+        <button type="button" (click)="isOpened = false">Cancel</button>
+    </form>
+}

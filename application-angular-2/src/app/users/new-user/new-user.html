@@ -1,0 +1,16 @@
+<button (click)="openAddUserForm()">Add new user</button>
+@if (isOpened()) {
+    <form (ngSubmit)="onSubmit()" class="container">
+        <h3>Add New User</h3>
+        <label for="name">
+            Name <input type="text" id="name" name="name" required [(ngModel)]="enteredUserName" />
+        </label>
+        <label for="email">
+            Email <input type="email" id="email" name="email" required [(ngModel)]="enteredUserEmail" />
+        </label>
+        <div>
+            <input type="submit" id="submit" value="Add" />
+            <button type="button" (click)="isOpened.set(false)">Cancel</button>
+        </div>
+    </form>
+}

@@ -1,0 +1,7 @@
+<ul>
+    @for (user of users(); track user.id) {
+        <li (click)="selectUser(user.id)">
+            <a>{{ user.name }} - {{ user.email }}</a>
+        </li>
+    }
+</ul>
