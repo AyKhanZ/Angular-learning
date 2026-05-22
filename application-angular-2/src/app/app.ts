@@ -11,7 +11,7 @@ import { NewUserComponent } from "./users/new-user/new-user";
   imports: [TasksComponent, UsersComponent, UserComponent, NewUserComponent]
 })
 export class App {
-  userId?: number;
+  userId!: number;
 
   onSelectUser(userId: number) {
     this.userId = userId;

@@ -1,4 +1,4 @@
-import { Component , effect, inject, input , signal } from '@angular/core';
+import { Component , inject, input , signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../../../services/tasks.service';
 import { Task } from '../../../types/task';
@@ -16,8 +16,7 @@ export class NewTaskComponent {
   enteredDescription = signal('');
   taskService = inject(TasksService);
 
-  onSubmit() {
-    const newTask: Task = {
+  onSubmit() {const newTask: Task = {
       id: Math.random(),
       userId : this.userId(),
       title: this.enteredTitle(),

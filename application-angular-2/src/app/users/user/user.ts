@@ -1,7 +1,6 @@
 import { Component, inject, input, computed } from '@angular/core';
-import { UsersService } from '../../../services/users.service';
-import { User } from '../../../types/user';
 import { NewTaskComponent } from '../../tasks/new-task/new-task';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-user',
@@ -10,7 +9,9 @@ import { NewTaskComponent } from '../../tasks/new-task/new-task';
   styleUrl: './user.css',
 })
 export class UserComponent {
-  userId = input.required<number | undefined>();
+  userId = input.required<number>();
   userService = inject(UsersService);
-  user = computed(() => this.userService.getUser(this.userId())?.());
+  user = computed(() =>
+    this.userService.getUserById(this.userId())()
+  );
 }

@@ -1,60 +1,69 @@
-import { User } from "../types/user";
-import { computed, inject, Injectable, signal } from "@angular/core";
-import { TasksService } from "./tasks.service";
+import { Injectable, Signal, signal, computed, inject } from '@angular/core';
+import type { User } from '../types/user';
+import { TasksService } from './tasks.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UsersService {
-    private users = signal<User[]>([]);
-    private tasksService = inject(TasksService)
+  private users = signal<User[]>([]);
+  private taskService = inject(TasksService)
 
-    constructor() {
-        const data = localStorage.getItem('users');
-        if (data) {
-            this.users.set(JSON.parse(data));
-        }
+  constructor() {
+    const data = localStorage.getItem('users');
+    if (data) {
+      this.users.set(JSON.parse(data));
     }
-
-    getUsers() {
-      return computed(() =>
-        this.users().map(user => ({
-          ...user,
-          tasks: this.tasksService.getTasks(user.id),
-        }))
-      );
-    }
-
-    getUser(id?: number) {
-      if (!id || id <= 0) return;
-
-      return computed(() => {
-        const user = this.users().find(u => u.id === id);
-        if (!user) return;
-
-        return {
-          ...user,
-          tasks: this.tasksService.getTasks(user.id),
-        };
-      });
-    }
-
-    createUser(user: User): void {
-    const updated = [...this.users(), user];
-    this.users.set(updated);
-    localStorage.setItem('users', JSON.stringify(updated));
   }
 
-  updateUser(id: number, user: User): void {
-    const updated = this.users().map(u =>
-      u.id === id ? { ...user } : u
-    );
+  getUserById(id: number) {
+    return computed(() => {
+        const user = this.users().find(u => u.id === id)
+        if(!user) {
+            return;
+        }
 
-    this.users.set(updated);
-    localStorage.setItem('users', JSON.stringify(updated));
+        return {
+            ...user,
+            tasks: this.taskService.getTasks(user.id)
+        }
+    });
+  }
+
+  getUsers() {
+    return computed(() => 
+        this.users().map((user) => ({
+            ...user,
+            tasks: this.taskService.getTasks(user.id)
+        }))
+    );
+  }
+
+  createUser(user: User): void {
+    if (!user) {
+      return;
+    }
+    const updatedUsers = [...this.users(), user];
+    this.users.set(updatedUsers);
+    this.saveToStorage();
+  }
+
+  updateUser(newUser: User): void {
+    if (!newUser) {
+      return;
+    }
+    const updatedUsers = this.users().map((user) =>
+      newUser.id === user.id ? { ...newUser } : user
+    );
+    this.users.set(updatedUsers);
+    this.saveToStorage();
   }
 
   deleteUser(id: number): void {
-    const updated = this.users().filter(user => user.id !== id);
-    this.users.set(updated);
-    localStorage.setItem('users', JSON.stringify(updated));
+    const updatedUsers = [...this.users().filter((user) => user.id != id)];
+    this.users.set(updatedUsers);
+    this.saveToStorage();
+  }
+
+  private saveToStorage() {
+    localStorage.setItem('users', JSON.stringify(this.users()));
   }
 }
